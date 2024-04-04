@@ -29,7 +29,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { createSlideGroupSchema } from '@/schemas/slide'
+import { updateSlideGroupSchema } from '@/schemas/slide'
 import type { SlideGroup } from '@/types/slide'
 import type { User } from '@/types/user'
 
@@ -46,16 +46,17 @@ export default function GroupEditForm({
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
 
-  const form = useForm<z.infer<typeof createSlideGroupSchema>>({
-    resolver: zodResolver(createSlideGroupSchema),
+  const form = useForm<z.infer<typeof updateSlideGroupSchema>>({
+    resolver: zodResolver(updateSlideGroupSchema),
     defaultValues: {
       id: slideGroup.id,
       title: slideGroup.title,
       presentation_at: new Date(slideGroup.presentation_at),
+      drive_id: slideGroup.drive_id,
     },
   })
 
-  const onSubmit = (values: z.infer<typeof createSlideGroupSchema>) => {
+  const onSubmit = (values: z.infer<typeof updateSlideGroupSchema>) => {
     setError('')
     startTransition(async () => {
       if (user.role !== 'admin') {
@@ -180,6 +181,27 @@ export default function GroupEditForm({
               </Popover>
               <p className="text-red-500 text-xs">
                 {form.formState.errors.presentation_at?.message}
+              </p>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="drive_id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Google Drive ID
+                <TypeLabel type="必須" />
+              </FormLabel>
+              <FormDescription className="text-xs">
+                Google Drive ID を入力してください。
+              </FormDescription>
+              <FormControl>
+                <Input placeholder="タイトル" {...field} />
+              </FormControl>
+              <p className="text-red-500 text-xs">
+                {form.formState.errors.title?.message}
               </p>
             </FormItem>
           )}
