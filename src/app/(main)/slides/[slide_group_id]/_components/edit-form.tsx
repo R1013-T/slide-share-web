@@ -100,26 +100,6 @@ export default function GroupEditForm({
       >
         <FormField
           control={form.control}
-          name="id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                スライドID <TypeLabel type="必須" />
-              </FormLabel>
-              <FormDescription className="text-xs">
-                半角英数のみ有効です。
-              </FormDescription>
-              <FormControl>
-                <Input placeholder="title" {...field} />
-              </FormControl>
-              <p className="text-red-500 text-xs">
-                {form.formState.errors.id?.message}
-              </p>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
@@ -128,7 +108,7 @@ export default function GroupEditForm({
                 <TypeLabel type="必須" />
               </FormLabel>
               <FormDescription className="text-xs">
-                スライドのタイトルを入力してください。
+                グループのタイトルを入力してください。
               </FormDescription>
               <FormControl>
                 <Input placeholder="タイトル" {...field} />
