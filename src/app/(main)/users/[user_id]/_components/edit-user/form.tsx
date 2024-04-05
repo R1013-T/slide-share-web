@@ -14,6 +14,7 @@ import { updateUser } from '@/action/user'
 import { FormError } from '@/components/common/form/form-error'
 import TypeLabel from '@/components/common/form/type-label'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -51,6 +52,7 @@ export default function EditUserForm({ user }: { user: User }) {
       speaker_id: user?.speaker_id,
       school: user?.school,
       course: user?.course,
+      is_top_display: user?.is_top_display,
     },
   })
 
@@ -66,8 +68,7 @@ export default function EditUserForm({ user }: { user: User }) {
       const isExist = speakerList.data.some(
         (speaker) =>
           speaker.speaker_id === values.speaker_id &&
-          speaker.id !== user.id &&
-          values.speaker_id,
+          values.speaker_id !== user.speaker_id,
       )
       if (isExist) {
         setError('すでに存在する発表者IDです')
@@ -254,6 +255,24 @@ export default function EditUserForm({ user }: { user: User }) {
               </FormDescription>
               <FormControl>
                 <Input placeholder="IT科" {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="is_top_display"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>トップ表示</FormLabel>
+              <FormDescription className="text-xs">
+                トップページに表示されます。
+              </FormDescription>
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
             </FormItem>
           )}

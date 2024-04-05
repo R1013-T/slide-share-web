@@ -30,4 +30,5 @@ export const updateUserSchema = z.object({
   display_name: z.string().optional(),
   school: z.string().optional(),
   course: z.string().optional(),
+  is_top_display: z.boolean().optional(),
 })

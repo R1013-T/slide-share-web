@@ -6,6 +6,7 @@ export type ExtendedUser = DefaultSession['user'] & {
   display_name?: string
   school?: string
   course?: string
+  is_top_display?: boolean
 }
 
 declare module 'next-auth' {
