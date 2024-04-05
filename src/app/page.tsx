@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -8,6 +9,8 @@ import NewestSlideGroup from './_components/newest_slide_group'
 import { SpeakerList } from './(main)/speakers/_components/speaker_list'
 
 export default async function Home() {
+  redirect('https://slide-share-web.vercel.app/')
+
   return (
     <article>
       <ScrollArea className="h-dvh px-4">
