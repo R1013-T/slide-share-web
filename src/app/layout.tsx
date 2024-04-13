@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP } from 'next/font/google'
+import { redirect } from 'next/navigation'
 import { Toaster } from 'sonner'
 
 import Header from '@/components/common/header'
@@ -33,6 +34,8 @@ export default async function RootLayout({
 }) {
   const session = await auth()
   const user = session?.user
+
+  redirect('https://www.techc-lt.tokyo/')
 
   return (
     <html lang="ja" suppressHydrationWarning>
